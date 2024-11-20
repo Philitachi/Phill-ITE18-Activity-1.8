@@ -56,7 +56,7 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-
+/*
 window.addEventListener("dblclick", () => {
   const fullscreenElement =
     document.fullscreenElement || document.webkitFullscreenElement;
@@ -75,6 +75,7 @@ window.addEventListener("dblclick", () => {
     }
   }
 });
+*/
 
 /**
  * Camera
