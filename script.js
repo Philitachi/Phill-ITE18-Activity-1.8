@@ -15,7 +15,7 @@ const scene = new THREE.Scene();
 const gui = new dat.GUI();
 
 const parameters = {
-  color: 0x40e0d0,
+  color: 0x40e0d0, // Default color
   spin: () => {
     gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 });
   },
@@ -34,7 +34,10 @@ gui.add(mesh, "visible");
 
 gui.add(material, "wireframe");
 
-gui.addColor(parameters, "color");
+// Add color control in GUI and update box color dynamically
+gui.addColor(parameters, "color").onChange(() => {
+  material.color.set(parameters.color); // Update the material color
+});
 
 gui.add(parameters, "spin");
 
@@ -56,26 +59,26 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-/*
-window.addEventListener("dblclick", () => {
-  const fullscreenElement =
-    document.fullscreenElement || document.webkitFullscreenElement;
 
-  if (!fullscreenElement) {
-    if (canvas.requestFullscreen) {
-      canvas.requestFullscreen();
-    } else if (canvas.webkitRequestFullscreen) {
-      canvas.webkitRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-  }
-});
-*/
+// Remove the dblclick event listener to disable fullscreen
+// window.addEventListener("dblclick", () => {
+//   const fullscreenElement =
+//     document.fullscreenElement || document.webkitFullscreenElement;
+//
+//   if (!fullscreenElement) {
+//     if (canvas.requestFullscreen) {
+//       canvas.requestFullscreen();
+//     } else if (canvas.webkitRequestFullscreen) {
+//       canvas.webkitRequestFullscreen();
+//     }
+//   } else {
+//     if (document.exitFullscreen) {
+//       document.exitFullscreen();
+//     } else if (document.webkitExitFullscreen) {
+//       document.webkitExitFullscreen();
+//     }
+//   }
+// });
 
 /**
  * Camera
@@ -121,3 +124,4 @@ const tick = () => {
 };
 
 tick();
+
